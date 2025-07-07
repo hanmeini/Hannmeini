@@ -83,7 +83,6 @@ export default function Navbar() {
           </button>
         </div>
       </nav>
-
       {/* --- Panel Menu Mobile --- */}
       <AnimatePresence>
         {mobileMenuOpen && (
@@ -115,17 +114,29 @@ export default function Navbar() {
               >
                   <nav className="flex flex-col space-y-2">
                       <motion.div variants={itemVariants}>
-                          <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-4 p-3 rounded-lg text-lg font-medium text-gray-700 hover:bg-gray-100 transition-colors">
+                          <Link
+                            href="/"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="flex items-center gap-4 p-3 rounded-lg text-lg font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+                            legacyBehavior>
                               <FiHome /> Home
                           </Link>
                       </motion.div>
                       <motion.div variants={itemVariants}>
-                          <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-4 p-3 rounded-lg text-lg font-medium text-gray-700 hover:bg-gray-100 transition-colors">
+                          <Link
+                            href="/about"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="flex items-center gap-4 p-3 rounded-lg text-lg font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+                            legacyBehavior>
                               <FiUser /> About Me
                           </Link>
                       </motion.div>
                       <motion.div variants={itemVariants}>
-                          <Link href="/project" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-4 p-3 rounded-lg text-lg font-medium text-gray-700 hover:bg-gray-100 transition-colors">
+                          <Link
+                            href="/project"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="flex items-center gap-4 p-3 rounded-lg text-lg font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+                            legacyBehavior>
                               <FiHelpCircle /> Project
                           </Link>
                       </motion.div>
@@ -147,7 +158,11 @@ export default function Navbar() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0, transition: { delay: 0.4 } }}
               >
-                  <Link href="/kontak" onClick={() => setMobileMenuOpen(false)} className="w-full flex items-center justify-center gap-2 bg-blue-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-600 transition-colors">
+                  <Link
+                    href="/kontak"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full flex items-center justify-center gap-2 bg-blue-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-600 transition-colors"
+                    legacyBehavior>
                       <FiSend />
                       Let's Talk
                   </Link>

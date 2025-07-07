@@ -1,10 +1,16 @@
-import Image from "next/image";
-import LandingPage from '@/components/LandingPage'
-
+import Hero from '@/components/Hero';
+import Projects from '@/components/Projects';
+import About from '@/components/About'
+import Shots from '@/components/Shots';
+import Tools from '@/components/Tools';
 export default function Home() {
   return (
     <>
-      <LandingPage/>
+      <Hero />
+      <Projects />
+      <Shots />
+      <About />
+      <Tools />
     </>
   );
 }

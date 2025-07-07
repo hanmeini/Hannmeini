@@ -21,7 +21,7 @@ body {
   padding: 0;
   background-color: #ffffff;
   scroll-behavior: smooth;
-  overflow-x: hidden;
-  font-family: var(--font-satoshi), sans-serif; 
+  overflow-x: hidden; 
+  font-family: satoshi;
 }
 

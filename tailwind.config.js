@@ -25,6 +25,7 @@ module.exports = {
         manrope: ['var(--font-manrope)'],
         sans: ['var(--font-satoshi)', 'sans-serif'], 
         display: ['var(--font-playfair)', 'serif'],
+        asgard: ['var(--font-asgard)', 'sans-serif'],
       },
     },
   },

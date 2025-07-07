@@ -1,34 +1,36 @@
-// components/ui/ProjectCard.tsx
 "use client";
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 export default function ProjectCard({ project }) {
-  const textColor = project.bgColor === 'bg-gray-100' ? 'text-neutral-800' : 'text-white';
-
   return (
-    <Link href={project.link} legacyBehavior>
-      <motion.div
-        className={`block rounded-xl overflow-hidden ${project.bgColor}`}
-        whileHover={{ scale: 1.03 }}
-        transition={{ type: 'spring', stiffness: 300 }}
-      >
-        <div className="relative w-full h-64 md:h-80">
-          <Image
-            src={project.imageUrl}
-            alt={`Mockup of ${project.title}`}
-            fill
-            className="object-cover"
-          />
+    <Link href={`/projects/${project.id}`}>
+      <div className={`block rounded-xl overflow-hidden relative ${project.bgColor}`}>
+        <div className="relative w-full h-[500px] overflow-hidden">
+          <motion.div
+            className="w-full h-full"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: 'keyframes', stiffness: 300 }}
+          >
+            <Image
+              src={project.imageUrl}
+              alt={`Mockup of ${project.title}`}
+              fill
+              className="object-cover transition-transform duration-300"
+            />
+          </motion.div>
+
+          {/* Overlay gradasi hitam */}
+          <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/70 to-transparent z-10" />
+
+          {/* Teks di atas overlay */}
+          <div className="absolute bottom-4 p-5 left-4 right-4 z-20">
+            <h3 className="text-5xl font-bold text-white" style={{ fontFamily:'asgard' }}>{project.title}</h3>
+            <p className="text-2xl font-medium mt-1 text-gray-300">{project.category}</p>
+          </div>
         </div>
-        <div className="p-6">
-          <h3 className={`text-xl font-bold ${textColor}`}>{project.title}</h3>
-          <p className={`text-sm mt-1 ${textColor === 'text-white' ? 'text-neutral-400' : 'text-neutral-500'}`}>
-            {project.category}
-          </p>
-        </div>
-      </motion.div>
+      </div>
     </Link>
   );
 }
