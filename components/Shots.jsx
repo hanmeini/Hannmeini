@@ -19,7 +19,7 @@ const logos = [
 
 export default function Shots() {
   return (
-    <section id="projects" className="py-20 px-4">
+    <section id="projects" className="py-10 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="items-center mb-4 md:mb-10">
           <h2 className="text-xl md:text-3xl font-bold" style={{ fontFamily: 'asgard' }}>My Shots</h2>

@@ -45,11 +45,11 @@ export default function Hero() {
           Let's Work Together
         </button>
         <button className="bg-gray-200 text-gray-800 text-sm md:text-md font-semibold py-3 px-8 rounded-lg hover:bg-gray-300 transition-colors w-full sm:w-auto">
-          Download CV
+          My CV
         </button>
       </motion.div>
 
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.8 }}
@@ -71,7 +71,7 @@ export default function Hero() {
           <p className="text-2xl md:text-3xl font-bold text-purple-800">2</p>
           <p className="text-sm text-gray-500 mt-1">Championship</p>
         </div>
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 }

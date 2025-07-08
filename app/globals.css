@@ -15,6 +15,20 @@
     scrollbar-width: none;  /* Firefox */
 }
 
+.logoSwiper .swiper-wrapper {
+  transition-timing-function: linear !important;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+  -webkit-animation: marquee 25s linear infinite;
+}
+
 html,
 body {
   margin: 0;

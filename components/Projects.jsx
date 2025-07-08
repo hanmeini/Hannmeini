@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { supabase } from '@/lib/supabaseClient';
 import ProjectCard from './ProjectCard';
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 export default function Projects() {
   const [projects, setProjects] = useState([]);
@@ -27,7 +28,7 @@ export default function Projects() {
   },[])
 
   return (
-    <section id="projects" className="py-20 px-4">
+    <section id="projects" className="py-10 px-4">
       <div className="max-w-[68rem] mx-auto">
         <div className="flex justify-between items-center">
           <h2 className="text-xl md:text-3xl font-bold" style={{ fontFamily: 'asgard' }}>My works</h2>
@@ -43,7 +44,11 @@ export default function Projects() {
         {loading? (
           <p className='text-center text-gray-600'>Loading Projects...</p>
         ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.6 }}
+        className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project) => (
               <ProjectCard key={project.id} project={{
                 ...project,
@@ -51,7 +56,7 @@ export default function Projects() {
 
               }} />
           ))}
-        </div>
+        </motion.div>
         )}
       </div>
     </section>

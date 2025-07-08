@@ -14,7 +14,7 @@ export default function About() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800">About</h2>
-          <hr className="mt-4 border-t-2 border-gray-200 w-24" />
+          <hr className="mt-4 text-gray-300 w-full" />
         </motion.div>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
           <motion.div
@@ -24,21 +24,21 @@ export default function About() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7 }}
           >
-            <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+            <p className="text-base md:text-xl text-gray-600 leading-relaxed">
               I am a passionate and detail-oriented Software Development student with hands-on experience in creating intuitive and functional web applications.
             </p>
-            <p className="mt-4 text-base md:text-lg text-gray-600 leading-relaxed">
+            <p className="mt-4 text-base md:text-xl text-gray-600 leading-relaxed">
               My journey in the tech field has equipped me with a diverse skill set that combines problem-solving, clean code principles, and a strong understanding of modern web technologies.
             </p>
             <div className="mt-8 flex items-center gap-4 flex-wrap">
-              <button className="bg-gray-200 text-gray-800 font-semibold py-2 px-5 rounded-full hover:bg-gray-300 transition-colors">
+              <button className="bg-gray-200 text-gray-800 font-semibold py-5 px-14 rounded-2xl hover:bg-gray-300 text-xl transition-colors">
                 About Me
               </button>
-              <div className="flex items-center gap-4 text-gray-500">
-                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="hover:text-blue-500 transition-colors"><FiTwitter size={22} /></a>
-                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-blue-500 transition-colors"><FiLinkedin size={22} /></a>
-                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hover:text-blue-500 transition-colors"><FiGithub size={22} /></a>
-                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-blue-500 transition-colors"><FiInstagram size={22} /></a>
+              <div className="flex items-center gap-10 text-gray-500">
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-black"><FiTwitter size={40} /></a>
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-black"><FiLinkedin size={40} /></a>
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-black"><FiGithub size={40} /></a>
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-black"><FiInstagram size={40} /></a>
               </div>
             </div>
           </motion.div>
@@ -51,7 +51,7 @@ export default function About() {
           >
             <div className="relative w-64 h-64 md:w-80 md:h-80">
               <Image
-                src="/images/your-photo.jpg" // GANTI DENGAN PATH FOTO ANDA
+                src="/images/your-photo.jpg" 
                 alt="Your Name"
                 fill
                 className="rounded-full object-cover shadow-lg"
