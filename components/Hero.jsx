@@ -1,5 +1,114 @@
 "use client";
 import { motion } from 'framer-motion';
+import {FiArrowRight, FiDownloadCloud} from 'react-icons/fi'
+
+const LiquidFillButton = ({ text, primary = true }) => {
+  const primaryClasses = "bg-gray-900 text-white";
+  const secondaryClasses = "bg-gray-200 text-gray-800";
+  
+  const primaryHoverClasses = "hover:text-gray-900 before:bg-white";
+  const secondaryHoverClasses = "hover:text-white before:bg-gray-900";
+
+  return (
+    <button className={`
+      relative 
+      text-sm md:text-md font-semibold py-3 px-8 rounded-lg 
+      w-full sm:w-auto
+      overflow-hidden 
+      transition-colors duration-300 ease-in-out
+      ${primary ? primaryClasses : secondaryClasses}
+      ${primary ? primaryHoverClasses : secondaryHoverClasses}
+      
+      before:absolute 
+      before:bottom-0 
+      before:left-0 
+      before:w-full 
+      before:h-full 
+      before:translate-y-full 
+      before:transition-transform 
+      before:duration-300 
+      before:ease-in-out
+    `}>
+      <span className="relative z-10">{text}</span>
+    </button>
+  );
+};
+
+const ShimmerBorderButton = ({ text, primary = true }) => {
+  const primaryClasses = "bg-gray-900 text-white";
+  const secondaryClasses = "bg-gray-200 text-gray-800";
+
+  return (
+    <button className={`
+      relative 
+      text-sm md:text-md font-semibold py-3 px-8 rounded-lg 
+      w-full sm:w-auto
+      overflow-hidden
+      group
+      ${primary ? primaryClasses : secondaryClasses}
+    `}>
+      {/* Lapisan Latar Belakang */}
+      <span className="absolute inset-0 z-0 transition-colors duration-300 group-hover:bg-gray-800"></span>
+      
+      {/* Lapisan Gradasi Berputar (Awalnya tidak terlihat) */}
+      <span className="absolute -inset-1 z-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+        <span className="absolute inset-0 animate-border-spin rounded-xl bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+      </span>
+
+      {/* Konten Tombol */}
+      <span className="relative z-10">{text}</span>
+    </button>
+  );
+};
+
+const Flip3DButton = ({ text, icon, primary = true }) => {
+  const Icon = icon;
+  const primaryClasses = "bg-gray-900 text-white";
+  const secondaryClasses = "bg-gray-200 text-gray-800";
+
+  return (
+    // Container untuk perspektif 3D
+    <div className="group w-full sm:w-auto" style={{ perspective: '1000px' }}>
+      <button 
+        className={`
+          relative 
+          text-sm md:text-md font-semibold 
+          w-full 
+          transition-transform duration-500 ease-in-out
+        `}
+        style={{ transformStyle: 'preserve-3d' }}
+      >
+        {/* Sisi Depan */}
+        <div className={`
+          flex items-center justify-center gap-2
+          py-3 px-8 rounded-lg 
+          w-full
+          transition-colors duration-300
+          ${primary ? primaryClasses : secondaryClasses}
+        `}>
+          {text}
+        </div>
+        
+        {/* Sisi Belakang (Awalnya terbalik) */}
+        <div 
+          className={`
+            absolute inset-0 
+            flex items-center justify-center 
+            py-3 px-8 rounded-lg 
+            ${primary ? 'bg-white text-gray-900' : 'bg-gray-900 text-white'}
+          `}
+          style={{ 
+            transform: 'rotateX(180deg)',
+            backfaceVisibility: 'hidden',
+          }}
+        >
+          <Icon size={20} />
+        </div>
+      </button>
+    </div>
+  );
+};
+
 
 export default function Hero() {
   return (
@@ -10,7 +119,7 @@ export default function Hero() {
         transition={{ duration: 0.5 }}
         className="mb-8 border border-gray-400 rounded-full flex flex-row font-medium items-center justify-center gap-2 px-4 py-2 text-xs text-gray-800"
       >
-        <div className='w-[6px] h-[6px] bg-green-500 animate-blink rounded-full'></div>
+        <div className='w-[6px] h-[6px] bg-green-500 animate-pulse rounded-full'></div>
         Available for work
       </motion.div>
 
@@ -41,12 +150,10 @@ export default function Hero() {
         transition={{ duration: 0.7, delay: 0.6 }}
         className="flex flex-col sm:flex-row items-center gap-4 mt-10"
       >
-        <button className="bg-gray-900 text-white text-sm md:text-md font-semibold py-3 px-8 rounded-lg hover:bg-gray-800 transition-colors w-full sm:w-auto">
-          Let's Work Together
-        </button>
-        <button className="bg-gray-200 text-gray-800 text-sm md:text-md font-semibold py-3 px-8 rounded-lg hover:bg-gray-300 transition-colors w-full sm:w-auto">
-          My CV
-        </button>
+      <div className="flex flex-col sm:flex-row items-center gap-4">
+        <ShimmerBorderButton text="Let's Work Together" primary={true} />
+        <ShimmerBorderButton text="My CV" primary={false} />
+      </div>
       </motion.div>
 
       {/* <motion.div

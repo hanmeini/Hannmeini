@@ -13,7 +13,7 @@ export default function About() {
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800">About</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800" style={{ fontFamily:'asgard' }}>About</h2>
           <hr className="mt-4 text-gray-300 w-full" />
         </motion.div>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-12 items-center">

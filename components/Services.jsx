@@ -74,7 +74,7 @@ export default function Services() {
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}
         <div className="text-left mx-auto mb-16">
-          <h2 className="text-xl md:text-3xl font-bold">What I Can Do</h2>
+          <h2 className="text-xl md:text-3xl font-bold" style={{ fontFamily:'asgard' }}>What I Can Do</h2>
           <hr className="mt-4 text-gray-300 w-full" />
           <p className="mt-4 text-lg text-gray-600 max-w-3xl">
             I have skills in web and mobile application development, focusing on creating functional and user-friendly solutions. I'm accustomed to implementing clean code principles and best practices.

@@ -8,7 +8,7 @@ import { FiFacebook, FiTwitter, FiInstagram, FiLinkedin } from 'react-icons/fi';
 export default function Footer() {
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
-      <div className="max-w-7xl mx-auto px-6 py-16">
+      <div className="max-w-7xl mx-auto px-6 pt-16">
         
         {/* Grid Utama Footer */}
         <div className="grid grid-cols-1 md:grid-cols-10 gap-12">
@@ -39,10 +39,10 @@ export default function Footer() {
           <div className="md:col-span-2">
             <h3 className="text-lg font-semibold text-gray-800 mb-4">Quick Links</h3>
             <ul className="space-y-3">
-              <li><Link href="#home" className="text-gray-600 hover:text-blue-600 hover:underline">Home</Link></li>
-              <li><Link href="#about" className="text-gray-600 hover:text-blue-600 hover:underline">About Me</Link></li>
-              <li><Link href="#projects" className="text-gray-600 hover:text-blue-600 hover:underline">Project</Link></li>
-              <li><Link href="#contact" className="text-gray-600 hover:text-blue-600 hover:underline">Contact</Link></li>
+              <li><Link href="/#home" className="text-gray-600 hover:text-blue-600 hover:underline">Home</Link></li>
+              <li><Link href="/#about" className="text-gray-600 hover:text-blue-600 hover:underline">About Me</Link></li>
+              <li><Link href="/#projects" className="text-gray-600 hover:text-blue-600 hover:underline">Project</Link></li>
+              <li><Link href="/#contact" className="text-gray-600 hover:text-blue-600 hover:underline">Contact</Link></li>
             </ul>
           </div>
 
@@ -70,10 +70,10 @@ export default function Footer() {
         </div>
 
         {/* Sub-footer untuk Copyright */}
-        <div className="mt-16 pt-8 border-t border-gray-200 text-center text-sm text-gray-500">
+        <div className="border-t border-gray-200 text-center text-sm text-gray-500 p-5 flex justify-start">
           <p>
             © {new Date().getFullYear()} Who cares ? It's {' '}
-            <a href="#" className="text-blue-600 hover:underline">open source</a>
+            <a href="" className="text-blue-600 hover:underline">open source</a>
           </p>
         </div>
       </div>

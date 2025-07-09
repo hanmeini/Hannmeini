@@ -6,15 +6,16 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
+import Icon from './Icon';
 
 const logos = [
-  { id: 1, src: '/logos/react.svg', alt: 'React' },
-  { id: 2, src: '/logos/nextjs.svg', alt: 'Next.js' },
-  { id: 3, src: '/logos/tailwindcss.svg', alt: 'Tailwind CSS' },
-  { id: 4, src: '/logos/figma.svg', alt: 'Figma' },
-  { id: 5, src: '/logos/nodejs.svg', alt: 'Node.js' },
-  { id: 6, src: '/logos/typescript.svg', alt: 'TypeScript' },
-  { id: 7, src: '/logos/javascript.svg', alt: 'JavaScript' },
+  { id: 1, src: 'react.svg', alt: 'React' },
+  { id: 2, src: 'nextdotjs.svg', alt: 'Next.js' },
+  { id: 3, src: 'tailwindcss.svg', alt: 'Tailwind CSS' },
+  { id: 4, src: 'figma.svg', alt: 'Figma' },
+  { id: 5, src: 'nodedotjs.svg', alt: 'Node.js' },
+  { id: 6, src: 'typescript.svg', alt: 'TypeScript' },
+  { id: 7, src: 'javascript.svg', alt: 'JavaScript' },
 ];
 
 export default function Shots() {
@@ -25,34 +26,25 @@ export default function Shots() {
           <h2 className="text-xl md:text-3xl font-bold" style={{ fontFamily: 'asgard' }}>My Shots</h2>
         </div>
         <hr className='my-5 border-gray-300' />
-        <div className="container mx-auto">
-            <Swiper
-            // Daftarkan modul yang akan digunakan
-            modules={[Autoplay]}
-            
-            // Konfigurasi utama untuk efek marquee
-            loop={true}
-            slidesPerView={'auto'}
-            speed={5000} // Durasi transisi yang panjang untuk gerakan halus
-            autoplay={{
-                delay: 1, // Jeda 1ms antar transisi
-                disableOnInteraction: false, // Lanjutkan autoplay meski ada interaksi
-            }}
-            spaceBetween={60} // Jarak antar logo
-            className="logoSwiper" // Class kustom untuk styling tambahan
-            >
+        <div className="relative w-full overflow-hidden">
+          {/* Gradasi di sisi kiri dan kanan */}
+          <div className="absolute top-0 left-0 h-full w-24 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="absolute top-0 right-0 h-full w-24 bg-gradient-to-l from-white to-transparent z-10" />
+          <div className="flex animate-marquee whitespace-nowrap">
+            {/* Render pertama */}
             {logos.map((logo) => (
-                <SwiperSlide key={logo.id} className="!w-auto">
-                <div className="flex items-center justify-center h-16">
-                    <img 
-                    src={logo.src} 
-                    alt={logo.alt} 
-                    className="max-h-12 w-auto grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                    />
-                </div>
-                </SwiperSlide>
+              <div key={`first-${logo.id}`} className="flex-shrink-0 flex items-center justify-center w-32 h-24">
+                {/* 3. Ukuran ikon disesuaikan menjadi lebih besar tapi wajar */}
+                <Icon src={logo.src} alt={logo.alt} className='h-12 w-12' />
+              </div>
             ))}
-            </Swiper>
+            {/* Render kedua */}
+            {logos.map((logo) => (
+              <div key={`second-${logo.id}`} className="flex-shrink-0 flex items-center justify-center w-32 h-24">
+                <Icon src={logo.src} alt={logo.alt} className='h-12 w-12' />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

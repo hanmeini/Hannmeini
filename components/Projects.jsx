@@ -4,6 +4,7 @@ import { supabase } from '@/lib/supabaseClient';
 import ProjectCard from './ProjectCard';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import LoadingCard from './LoadingProject'
 
 export default function Projects() {
   const [projects, setProjects] = useState([]);
@@ -11,6 +12,7 @@ export default function Projects() {
 
   useEffect(()=>{
     const fetchProjects = async () => {
+      setLoading(true)
       const {data, error} = await supabase
       .from('projects')
       .select('*')
@@ -21,7 +23,6 @@ export default function Projects() {
       } else {
         setProjects(data)
       }
-
       setLoading(false)
     }
     fetchProjects();
@@ -40,24 +41,27 @@ export default function Projects() {
           </Link>
         </div>
         <hr className='my-14 border-gray-300' />
-
-        {loading? (
-          <p className='text-center text-gray-600'>Loading Projects...</p>
-        ) : (
-        <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.6 }}
-        className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project) => (
-              <ProjectCard key={project.id} project={{
-                ...project,
-                imageUrl: project.image_url, 
-
-              }} />
-          ))}
-        </motion.div>
-        )}
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+          {loading ? (
+            Array.from({ length: 6 }).map((_, index) => (
+              <LoadingCard key={index} />
+            ))
+          ) : (
+            projects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <ProjectCard key={project.id} project={{
+                  ...project,
+                  imageUrl: project.image_url,}}
+                />
+              </motion.div>
+            ))
+          )}
+        </div>
       </div>
     </section>
   );
