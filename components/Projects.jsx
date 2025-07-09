@@ -34,7 +34,7 @@ export default function Projects() {
         <div className="flex justify-between items-center">
           <h2 className="text-xl md:text-3xl font-bold" style={{ fontFamily: 'asgard' }}>My works</h2>
           <Link
-            href="/"
+            href="/projects"
             className="text-xl md:text-2xl font-semibold pb-1 bg-gradient-to-r from-black to-black bg-no-repeat bg-bottom bg-[length:0%_2px] hover:bg-[length:100%_2px] transition-all duration-300 ease-in-out"
           >
             All works
