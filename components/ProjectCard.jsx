@@ -11,6 +11,8 @@ export default function ProjectCard({ project }) {
             <Image
               src={project.imageUrl}
               alt={`Mockup of ${project.title}`}
+              blurDataURL="data:..."
+              placeholder="blur" 
               fill
               className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
             />
