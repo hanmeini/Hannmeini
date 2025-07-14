@@ -51,7 +51,7 @@ export default function About() {
           >
             <div className="relative w-64 h-64 md:w-80 md:h-80">
               <Image
-                src="/logos/rehanporto.png" 
+                src="/logos/poto1.jpg" 
                 alt="Your Name"
                 fill
                 className="rounded-full object-cover shadow-lg"
