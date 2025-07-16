@@ -20,21 +20,35 @@ const galleryPhotos = [
 const certificates = [
   { 
     id: 1,
-    src: '/logos/Akhmad Raihan Khomeini S[1].png', 
+    src: '/logos/sertif1.png', 
     alt: 'Sertifikat Juara 1 Lomba Web Desain',
     title: '1st Place - National Web Design Competition',
     description: 'Achieved first place by developing "Selaras", a web platform focused on solving food waste. This project demonstrated proficiency in front-end development, UI/UX implementation, and problem-solving.',
   },
   { 
     id: 2,
-    src: '/logos/Akhmad Raihan Khomeini S[1].png', 
+    src: '/logos/sertif2.png', 
     alt: 'Sertifikat JavaScript Fundamental',
     title: 'JavaScript Fundamentals Certification',
     description: 'Completed a comprehensive course covering core JavaScript concepts, including ES6+, DOM manipulation, and asynchronous programming, laying a strong foundation for web development.',
   },
   { 
     id: 3,
-    src: '/logos/Akhmad Raihan Khomeini S[1].png', 
+    src: '/logos/sertif3.png', 
+    alt: 'Sertifikat React Basics',
+    title: 'React Basics Workshop',
+    description: 'Participated in an intensive workshop on React, learning about component-based architecture, state management, and hooks to build modern, interactive user interfaces.',
+  },
+  { 
+    id: 4,
+    src: '/logos/sertif4.png', 
+    alt: 'Sertifikat React Basics',
+    title: 'React Basics Workshop',
+    description: 'Participated in an intensive workshop on React, learning about component-based architecture, state management, and hooks to build modern, interactive user interfaces.',
+  },
+  { 
+    id: 5,
+    src: '/logos/sertif5.png', 
     alt: 'Sertifikat React Basics',
     title: 'React Basics Workshop',
     description: 'Participated in an intensive workshop on React, learning about component-based architecture, state management, and hooks to build modern, interactive user interfaces.',
@@ -42,9 +56,31 @@ const certificates = [
 ];
 
 const experiences = [
-  { year: '2023', title: 'Mulai Belajar di SMK Telkom', description: 'Memulai perjalanan saya di dunia PPLG, di mana saya pertama kali jatuh cinta dengan coding.' },
-  { year: '2024', title: 'Juara 1 Lomba Web Desain Nasional', description: 'Mengembangkan "Selaras" dan berhasil meraih juara pertama, mengasah kemampuan frontend saya.' },
-  { year: '2025', title: 'Mengerjakan Proyek Freelance Pertama', description: 'Membangun website company profile, belajar tentang manajemen klien dan masalah bisnis nyata.' },
+    {
+    company: 'GoPay',
+    role: 'UI/UX Design Intern',
+    description: [
+      'As a UI/UX Designer Intern at GoPay, I had the privilege of contributing to the dynamic and innovative world of digital payments. During my internship, I immersed myself in the intricacies of creating seamless and user-friendly interfaces that align with GoPay commitment to providing an exceptional financial experience.',
+      'I Collaborated with the design team to create visually appealing and intuitive user interfaces for GoPay mobile and web applications. Assisted in designing clean, modern layouts that enhanced the overall user experienced.',
+      'I Engaged in cross-functional collaboration with developers, product managers, and fellow designers. Participated in design sprints and brainstorming sessions to ideate and solve complex design challenges.'
+    ]
+  },
+  {
+    company: 'National Web Design Competition',
+    role: '1st Place Winner & Frontend Developer',
+    description: [
+      'Developed "Saresa", a web platform focused on solving food waste, which won first place in a national competition. My role involved translating a complex UI/UX design into a pixel-perfect, responsive, using vanilla HTML, CSS, and JavaScript.',
+      'This experience honed my skills in front-end architecture, DOM manipulation, and creating fluid animations with pure CSS, proving my ability to deliver a high-quality product under competitive pressure.'
+    ]
+  },
+    {
+    company: 'National Web Design Competition',
+    role: '3rd Place Winner & Frontend Developer',
+    description: [
+      'Developed "Swara", a web platform focused on solving food waste, which won first place in a national competition. My role involved translating a complex UI/UX design into a pixel-perfect, responsive, using vanilla HTML, CSS, and JavaScript.',
+      'This experience honed my skills in front-end architecture, DOM manipulation, and creating fluid animations with pure CSS, proving my ability to deliver a high-quality product under competitive pressure.'
+    ]
+  },
 ];
 
 export default function AboutPage() {
@@ -74,7 +110,7 @@ export default function AboutPage() {
           <hr className="mt-4 mb-20 text-gray-300 w-full" />
         </motion.div>
         
-        <div className="grid grid-cols-4 grid-rows-3 gap-4 h-[500px] md:h-[700px] max-w-4xl mx-auto">
+        <div className="grid grid-cols-4 grid-rows-3 gap-4 h-[300px] md:h-[700px] max-w-4xl mx-auto">
           {galleryPhotos.map((photo, index) => (
             <motion.div
               key={index}
@@ -111,33 +147,33 @@ export default function AboutPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="my-24 max-w-4xl mx-auto border border-gray-200 rounded-xl flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-gray-200"
+          className="my-24 max-w-2xl mx-auto flex flex-row"
         >
-          <div className="flex-1 p-6 text-center">
-            <FiCode className="mx-auto w-8 h-8 text-blue-500 mb-2" />
-            <p className="text-2xl font-bold">10,000+</p>
-            <p className="text-sm text-gray-500">Lines of Code</p>
+          <div className="flex-1 p-2 md:p-6 text-center">
+            <FiCode className="mx-auto w-8 h-8  mb-2" />
+            <p className="text-md md:text-2xl font-bold">10+</p>
+            <p className="text-sm text-gray-500">Projects</p>
           </div>
-          <div className="flex-1 p-6 text-center">
-            <FiCoffee className="mx-auto w-8 h-8 text-amber-600 mb-2" />
-            <p className="text-2xl font-bold">500+</p>
-            <p className="text-sm text-gray-500">Cups of Coffee</p>
+          <div className="flex-1 p-2 md:p-6 text-center">
+            <FiCoffee className="mx-auto w-8 h-8  mb-2" />
+            <p className="text-md md:text-2xl font-bold">2</p>
+            <p className="text-sm text-gray-500">Awards</p>
           </div>
-          <div className="flex-1 p-6 text-center">
-            <FiAward className="mx-auto w-8 h-8 text-yellow-500 mb-2" />
-            <p className="text-2xl font-bold">3</p>
-            <p className="text-sm text-gray-500">Awards Won</p>
+          <div className="flex-1 p-2 md:p-6 text-center">
+            <FiAward className="mx-auto w-8 h-8  mb-2" />
+            <p className="text-md md:text-2xl font-bold">2+</p>
+            <p className="text-sm text-gray-500">Years</p>
           </div>
-          <div className="flex-1 p-6 text-center">
-            <FiBookOpen className="mx-auto w-8 h-8 text-green-500 mb-2" />
-            <p className="text-2xl font-bold">20+</p>
+          <div className="flex-1 p-2 md:p-6 text-center">
+            <FiBookOpen className="mx-auto w-8 h-8 mb-2" />
+            <p className="text-md md:text-2xl font-bold">10+</p>
             <p className="text-sm text-gray-500">Skills Learned</p>
           </div>
         </motion.div>
 
-        <section className="mb-24">
+        <section className="mb-24 max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800" style={{ fontFamily:'asgard' }}>Achievements</h2>
-          <hr className="mt-4 text-gray-300 w-full" />
+          <hr className="mt-4 text-gray-300 w-full mb-20 md:mb-auto" />
           
           {/* DESKTOP VIEW */}
           <div className="hidden lg:grid grid-cols-2 gap-12 min-h-[500px]">
@@ -248,28 +284,27 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="my-24">
+        <section className="my-24 max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800" style={{ fontFamily:'asgard' }}>My Experience</h2>
           <hr className="mt-4 text-gray-300 w-full mb-20" />
-          <div className="relative max-w-2xl mx-auto">
-            <div className="absolute left-1/2 top-0 h-full w-0.5 bg-gray-200" />
+          <div className="space-y-20">
             {experiences.map((exp, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
+                viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.6 }}
-                className={`mb-8 flex justify-between items-center w-full ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}
+                className='border-b border-gray-200 pb-5'
               >
-                <div className="hidden md:block w-5/12"></div>
-                <div className="z-10 flex items-center bg-blue-500 shadow-xl w-8 h-8 rounded-full">
-                  <h1 className="mx-auto text-white font-semibold text-sm">{index + 1}</h1>
+                <div className=" pb-8">
+                  <h3 className="text-xl md:text-4xl font-bold text-gray-900">{exp.company}</h3>
+                  <p className="text-lg text-gray-500 mt-1">{exp.role}</p>
                 </div>
-                <div className={`bg-white rounded-lg shadow-md p-6 w-full md:w-5/12 ${index % 2 === 0 ? 'text-right' : ''}`}>
-                  <p className="text-blue-500 font-semibold text-sm">{exp.year}</p>
-                  <h3 className="font-bold text-lg mt-1">{exp.title}</h3>
-                  <p className="text-gray-600 text-sm mt-2">{exp.description}</p>
+                <div className="mt-8 text-gray-700 text-lg leading-relaxed space-y-5">
+                  {exp.description.map((paragraph, pIndex) => (
+                    <p key={pIndex}>{paragraph}</p>
+                  ))}
                 </div>
               </motion.div>
             ))}

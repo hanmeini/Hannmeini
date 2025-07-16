@@ -142,7 +142,7 @@ export default function LandingPage() {
                             About Me
                         </button>
                         <div className="flex items-center gap-4 text-gray-500">
-                            <Link href="#" aria-label="Twitter" className="hover:text-blue-500 transition-colors"><FiTwitter size={22} /></Link>
+                            <Link href="https://www.instagram.com/hanmeini_/" ref={true} aria-label="Twitter" className="hover:text-blue-500 transition-colors"><FiTwitter size={22} /></Link>
                             <Link href="#" aria-label="LinkedIn" className="hover:text-blue-500 transition-colors"><FiLinkedin size={22} /></Link>
                             <Link href="#" aria-label="GitHub" className="hover:text-blue-500 transition-colors"><FiGithub size={22} /></Link>
                             <Link href="#" aria-label="Instagram" className="hover:text-blue-500 transition-colors"><FiInstagram size={22} /></Link>

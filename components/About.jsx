@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { FiLinkedin, FiGithub, FiTwitter, FiInstagram } from 'react-icons/fi';
+import Link from 'next/link';
 
 export default function About() {
   return (
@@ -31,14 +32,16 @@ export default function About() {
               My journey in the tech field has equipped me with a diverse skill set that combines problem-solving, clean code principles, and a strong understanding of modern web technologies.
             </p>
             <div className="mt-8 flex items-center gap-4 flex-wrap">
-              <button className="bg-gray-200 text-gray-800 font-semibold py-5 px-14 rounded-2xl hover:bg-gray-300 text-xl transition-colors">
+              <Link
+              href='/about'
+               className="bg-gray-200 text-gray-800 font-semibold py-3 px-10 md:py-5 md:px-14 rounded-lg md:rounded-2xl hover:bg-gray-300 text-xl transition-colors">
                 About Me
-              </button>
+              </Link>
               <div className="flex items-center gap-10 text-gray-500">
-                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-black"><FiTwitter size={40} /></a>
-                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-black"><FiLinkedin size={40} /></a>
-                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-black"><FiGithub size={40} /></a>
-                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-black"><FiInstagram size={40} /></a>
+                {/* <Link href="" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-black"><FiTwitter size={30} /></Link> */}
+                {/* <Link href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-black"><FiLinkedin size={30} /></Link> */}
+                <Link href="https://github.com/hanmeini" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-black"><FiGithub size={30} /></Link>
+                <Link href="https://www.instagram.com/hanmeini_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-black"><FiInstagram size={30} /></Link>
               </div>
             </div>
           </motion.div>

@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { supabase } from '../../lib/supabaseClient'; // Perbaiki typo: Client bukan CLient
+import { supabase } from '@/lib/supabaseClient'; 
 import { useRouter } from 'next/navigation';
+
 
 export default function AdminPage() {
   const [user, setUser] = useState(null);
@@ -16,7 +17,6 @@ export default function AdminPage() {
   const [githubUrl, setGithubUrl] = useState('');
   const [liveUrl, setLiveUrl] = useState('');
   const [projectDate, setProjectDate] = useState('');
-
   const [technologies, setTechnologies] = useState([]);
   const [selectedTech, setSelectedTech] = useState([]);
 
@@ -152,7 +152,7 @@ export default function AdminPage() {
   }
   return (
     user && (
-      <div className="p-20 max-w-4xl mx-auto">
+      <div className=" max-w-5xl h-screen mx-auto">
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold">Admin Panel</h1>

@@ -1,13 +1,14 @@
-import "./globals.css";
+import "../globals.css";
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { Manrope } from 'next/font/google';
 import localFont from 'next/font/local';
 import { Playfair_Display } from 'next/font/google'; 
+import { Analytics } from '@vercel/analytics/next';
 
 
 const asgard = localFont({
-  src: '../fonts/AsgardTrial-FitRegular.ttf',
+  src: '../../fonts/AsgardTrial-FitRegular.ttf',
   variable: '--font-asgard',     
   display: 'swap',
 });
@@ -20,7 +21,7 @@ const manrope = Manrope({
 });
 
 const satoshi = localFont({
-  src: '../fonts/Satoshi-Variable.ttf', 
+  src: '../../fonts/Satoshi-Variable.ttf', 
   variable: '--font-satoshi',        
   display: 'swap',
 });
@@ -30,23 +31,17 @@ const playfair = Playfair_Display({
   variable: '--font-playfair', 
   display: 'swap',
 });
-
 export const metadata = {
-  title: "Hanmeini",
-  description: "Portfolio",
+  title: "Admin Panel - Hanmeini",
+  description: "Admin area for portfolio management",
 };
 
-export default function RootLayout({ children }) {
+export default function AdminRootLayout({ children }) {
   return (
     <html lang="id" className={`${manrope.variable} ${satoshi.variable} ${asgard.variable} ${playfair.variable} no-scrollbar`}>
       <body>
-          <div className="flex flex-col min-h-screen">
-            <Navbar />
-            <main className="flex-grow">
-              {children}
-            </main>
-            <Footer />
-          </div>
+        {children}
+        <Analytics />
       </body>
     </html>
   );

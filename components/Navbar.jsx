@@ -75,8 +75,8 @@ export default function Navbar() {
           <div className="hidden md:flex flex-auto justify-end items-center gap-14 text-sm font-medium text-[#2E2E2E]">
             <Link href="/" className="hover:text-blue-600 hover:-translate-y-1 transition-all duration-300 ease-in-out">Home</Link>
             <Link href="/about" className="hover:text-blue-600 hover:-translate-y-1 transition-all duration-300 ease-in-out">About Me</Link>
-            <Link href="/project" className="hover:text-blue-600 hover:-translate-y-1 transition-all duration-300 ease-in-out">Project</Link>
-            <Link href="/kontak" className="hover:text-blue-600 hover:-translate-y-1 transition-all duration-300 ease-in-out">Contact</Link>
+            <Link href="/projects" className="hover:text-blue-600 hover:-translate-y-1 transition-all duration-300 ease-in-out">Project</Link>
+            <Link href="/#contact" className="hover:text-blue-600 hover:-translate-y-1 transition-all duration-300 ease-in-out">Contact</Link>
           </div>
           <button onClick={() => setMobileMenuOpen(true)} className="md:hidden p-2 -ml-2 text-gray-700">
             <HamburgerIcon />
