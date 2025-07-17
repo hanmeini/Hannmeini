@@ -11,7 +11,7 @@ export default function EditProjectForm({ project }) {
   const [githubUrl, setGithubUrl] = useState(project.github_url);
   const [liveUrl, setLiveUrl] = useState(project.live_url);
   const [projectDate, setProjectDate] = useState(project.project_date);
-  const [imageFile, setImageFile] = useState(null); 
+  const [imageFile, setImageFile] = useState(null);
   const [currentImageUrl, setCurrentImageUrl] = useState(project.image_url);
 
   const [technologies, setTechnologies] = useState([]);

@@ -1,10 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiCode, FiCoffee, FiAward, FiBookOpen } from 'react-icons/fi';
 import Link from 'next/link';
+import { supabase } from '@/lib/supabaseClient'; 
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const galleryPhotos = [
@@ -85,12 +86,38 @@ const experiences = [
 
 export default function AboutPage() {
   const [selectedCert, setSelectedCert] = useState(0);
+  const [certificates, setCertificates] = useState([]);
+  const [loadingCerts, setLoadingCerts] = useState(true);
+
+  useEffect(() => {
+    const fetchCertificates = async () => {
+      setLoadingCerts(true);
+      // 'data' dan 'error' dideklarasikan di dalam scope ini
+      const { data, error } = await supabase
+        .from('certificates')
+        .select('*')
+        .order('issue_date', { ascending: false });
+
+      // 'error' hanya digunakan di dalam scope ini, yang mana sudah benar
+      if (error) {
+        console.error("Could not fetch certificates:", error);
+        setCertificates([]);
+      } else {
+        setCertificates(data || []);
+      }
+      setLoadingCerts(false);
+    };
+
+    fetchCertificates();
+  }, []); // Dependency array kosong agar hanya berjalan sekali saat komponen dimuat
 
   const handleNext = () => {
+    if (certificates.length === 0) return;
     setSelectedCert((prev) => (prev + 1) % certificates.length);
   };
 
   const handlePrev = () => {
+    if (certificates.length === 0) return;
     setSelectedCert((prev) => (prev - 1 + certificates.length) % certificates.length);
   };
 
@@ -170,118 +197,95 @@ export default function AboutPage() {
             <p className="text-sm text-gray-500">Skills Learned</p>
           </div>
         </motion.div>
-
-        <section className="mb-24 max-w-6xl">
+        
+        {/* ======================================= */}
+        {/* === 2. SECTION SERTIFIKAT INTERAKTIF === */}
+        {/* ======================================= */}
+        <section className="mb-24">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800" style={{ fontFamily:'asgard' }}>Achievements</h2>
-          <hr className="mt-4 text-gray-300 w-full mb-20 md:mb-auto" />
+          <hr className="mt-4 mb-20 md:mb-auto text-gray-300 w-full" />
           
-          {/* DESKTOP VIEW */}
-          <div className="hidden lg:grid grid-cols-2 gap-12 min-h-[500px]">
-            {/* Kolom kiri: tumpukan sertifikat */}
-            <div className="relative h-full flex justify-center items-center">
-              {certificates.map((cert, index) => (
-                <motion.div
-                  key={cert.id}
-                  initial={{ opacity: 0, y: 100 }}
-                  animate={{
-                    x: selectedCert === index ? -150 : 0,
-                    scale: selectedCert === index ? 1.1 : 0.9,
-                    zIndex: certificates.length - Math.abs(selectedCert - index),
-                    opacity: selectedCert === index ? 1 : 0.5,
-                  }}
-                  transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-                  className="absolute w-80 h-56 md:w-96 md:h-64 flex items-center shadow-2xl rounded-lg cursor-pointer bg-gray-100"
-                  onClick={() => setSelectedCert(index)}
-                >
-                  <Image src={cert.src} alt={cert.alt} fill className="object-cover rounded-lg" />
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Kanan: Deskripsi (dengan perbaikan centering) */}
-            <div className="relative flex flex-col justify-center h-full">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={selectedCert}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="w-full"
-                >
-                  <h3 className="text-2xl font-bold text-gray-900">{certificates[selectedCert].title}</h3>
-                  <p className="mt-4 text-lg text-gray-600 leading-relaxed">{certificates[selectedCert].description}</p>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Tombol navigasi (desktop) */}
-              <div className="mt-6 flex gap-4">
-                <button
-                  onClick={handlePrev}
-                  className="bg-gray-100 hover:bg-gray-200 p-3 rounded-full border shadow-sm transition-colors"
-                >
-                  <FiChevronLeft />
-                </button>
-                <button
-                  onClick={handleNext}
-                  className="bg-gray-100 hover:bg-gray-200 p-3 rounded-full border shadow-sm transition-colors"
-                >
-                  <FiChevronRight />
-                </button>
+          {loadingCerts ? (
+            <div className="text-center min-h-[500px] flex items-center justify-center">Loading certificates...</div>
+          ) : certificates.length > 0 ? (
+            <>
+              {/* DESKTOP VIEW */}
+              <div className="hidden lg:grid grid-cols-2 gap-12 min-h-[500px]">
+                <div className="relative h-full flex justify-center items-center">
+                  {certificates.map((cert, index) => (
+                    <motion.div
+                      key={cert.id}
+                      initial={{ opacity: 0, y: 100 }}
+                      animate={{
+                        x: selectedCert === index ? -150 : 0,
+                        scale: selectedCert === index ? 1.1 : 0.9,
+                        zIndex: certificates.length - Math.abs(selectedCert - index),
+                        opacity: selectedCert === index ? 1 : 0.5,
+                      }}
+                      transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+                      className="absolute w-80 h-56 md:w-96 md:h-64 flex items-center shadow-2xl rounded-lg cursor-pointer bg-gray-100"
+                      onClick={() => setSelectedCert(index)}
+                    >
+                      <Image src={cert.image_url} alt={cert.title || 'Certificate Image'} fill className="object-cover rounded-lg" />
+                    </motion.div>
+                  ))}
+                </div>
+                <div className="relative flex flex-col justify-center h-full">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={selectedCert}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-full"
+                    >
+                      <h3 className="text-2xl font-bold text-gray-900">{certificates[selectedCert].title}</h3>
+                      <p className="mt-4 text-lg text-gray-600 leading-relaxed">{certificates[selectedCert].description}</p>
+                    </motion.div>
+                  </AnimatePresence>
+                  <div className="mt-6 flex gap-4">
+                    <button onClick={handlePrev} className="bg-gray-100 hover:bg-gray-200 p-3 rounded-full border shadow-sm transition-colors"><FiChevronLeft /></button>
+                    <button onClick={handleNext} className="bg-gray-100 hover:bg-gray-200 p-3 rounded-full border shadow-sm transition-colors"><FiChevronRight /></button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
 
-          {/* MOBILE VIEW: Swipe dan tombol */}
-          <div className="lg:hidden flex flex-col items-center space-y-8">
-            <div className="relative w-full max-w-sm h-56 sm:h-64 shadow-2xl rounded-lg bg-gray-100 overflow-hidden cursor-grab">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={selectedCert}
-                  className="relative w-full h-full"
-                  initial={{ opacity: 0, x: 100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -100 }}
-                  transition={{ duration: 0.4 }}
-                  drag="x"
-                  dragConstraints={{ left: 0, right: 0 }}
-                  onDragEnd={(e, info) => {
-                    if (info.offset.x < -50) handleNext();
-                    else if (info.offset.x > 50) handlePrev();
-                  }}
-                >
-                  <Image
-                    src={certificates[selectedCert].src}
-                    alt={certificates[selectedCert].alt}
-                    fill
-                    className="object-cover rounded-lg"
-                  />
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Deskripsi */}
-            <div className="text-center px-4">
-              <h3 className="text-xl font-bold text-gray-900">{certificates[selectedCert].title}</h3>
-              <p className="mt-2 text-gray-600">{certificates[selectedCert].description}</p>
-            </div>
-
-            {/* Tombol navigasi */}
-            <div className="flex gap-4">
-              <button
-                onClick={handlePrev}
-                className="bg-gray-100 hover:bg-gray-200 p-3 rounded-full border shadow-sm transition-colors"
-              >
-                <FiChevronLeft />
-              </button>
-              <button
-                onClick={handleNext}
-                className="bg-gray-100 hover:bg-gray-200 p-3 rounded-full border shadow-sm transition-colors"
-              >
-                <FiChevronRight />
-              </button>
-            </div>
-          </div>
+              {/* MOBILE VIEW */}
+              <div className="lg:hidden flex flex-col items-center space-y-8">
+                <div className="relative w-full max-w-sm h-56 sm:h-64 shadow-2xl rounded-lg bg-gray-100 overflow-hidden cursor-grab">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={selectedCert}
+                      className="relative w-full h-full"
+                      initial={{ opacity: 0, x: 100 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -100 }}
+                      transition={{ duration: 0.4 }}
+                      drag="x"
+                      dragConstraints={{ left: 0, right: 0 }}
+                      onDragEnd={(e, info) => {
+                        if (info.offset.x < -50) handleNext();
+                        else if (info.offset.x > 50) handlePrev();
+                      }}
+                    >
+                      <Image src={certificates[selectedCert].image_url} alt={certificates[selectedCert].title || 'Certificate Image'} fill className="object-cover rounded-lg" />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+                <div className="text-center px-4">
+                  <h3 className="text-xl font-bold text-gray-900">{certificates[selectedCert].title}</h3>
+                  <p className="mt-2 text-gray-600">{certificates[selectedCert].description}</p>
+                </div>
+                <div className="flex gap-4">
+                  <button onClick={handlePrev} className="bg-gray-100 hover:bg-gray-200 p-3 rounded-full border shadow-sm transition-colors"><FiChevronLeft /></button>
+                  <button onClick={handleNext} className="bg-gray-100 hover:bg-gray-200 p-3 rounded-full border shadow-sm transition-colors"><FiChevronRight /></button>
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="text-center text-gray-500 min-h-[500px] flex items-center justify-center">No certificates found.</div>
+          )}
         </section>
 
         <section className="my-24 max-w-6xl">

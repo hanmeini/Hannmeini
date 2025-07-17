@@ -41,7 +41,6 @@ export default function AdminRootLayout({ children }) {
     <html lang="id" className={`${manrope.variable} ${satoshi.variable} ${asgard.variable} ${playfair.variable} no-scrollbar`}>
       <body>
         {children}
-        <Analytics />
       </body>
     </html>
   );

@@ -153,16 +153,6 @@ export default function AdminPage() {
   return (
     user && (
       <div className=" max-w-5xl h-screen mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-3xl font-bold">Admin Panel</h1>
-            <p className="text-sm text-gray-500">Logged in as: {user.email}</p>
-          </div>
-          <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-            Log Out
-          </button>
-        </div>
-        
         <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4 border-b pb-4">Add New Project</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

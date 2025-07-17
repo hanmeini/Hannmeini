@@ -8,14 +8,14 @@ import { FiFileText, FiAward, FiBriefcase, FiPlus, FiBarChart2, FiExternalLink }
 const StatCard = ({ title, value, icon, color }) => {
   const Icon = icon;
   return (
-    <div className="bg-white p-6 rounded-lg shadow">
+    <div className="bg-gray-800 p-6 rounded-lg shadow">
       <div className="flex items-center">
         <div className={`p-3 rounded-full mr-4 ${color}`}>
           <Icon className="w-6 h-6 text-white" />
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-gray-600">{title}</h3>
-          <p className="text-4xl font-bold text-gray-800">{value}</p>
+          <h3 className="text-lg font-semibold text-white">{title}</h3>
+          <p className="text-4xl font-bold text-white">{value}</p>
         </div>
       </div>
     </div>
