@@ -28,17 +28,6 @@ export default function Navbar() {
   const toggleLayanan = () => setLayananOpen(!layananOpen);
   const toggleProfile = () => setProfileOpen(!profileOpen);
 
-  // const handleLogout = async () => {
-  //   try {
-  //     await logout();
-  //     setProfileOpen(false);
-  //     setMobileMenuOpen(false); 
-  //     router.push('/login');
-  //   } catch (error) {
-  //     console.error("Gagal untuk logout", error);
-  //   }
-  // };
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (layananRef.current && !layananRef.current.contains(event.target)) setLayananOpen(false);
@@ -118,7 +107,7 @@ export default function Navbar() {
                             href="/"
                             onClick={() => setMobileMenuOpen(false)}
                             className="flex items-center gap-4 p-3 rounded-lg text-lg font-medium text-gray-700 hover:bg-gray-100 transition-colors"
-                            legacyBehavior>
+                            >
                               <FiHome /> Home
                           </Link>
                       </motion.div>
@@ -127,16 +116,16 @@ export default function Navbar() {
                             href="/about"
                             onClick={() => setMobileMenuOpen(false)}
                             className="flex items-center gap-4 p-3 rounded-lg text-lg font-medium text-gray-700 hover:bg-gray-100 transition-colors"
-                            legacyBehavior>
+                            >
                               <FiUser /> About Me
                           </Link>
                       </motion.div>
                       <motion.div variants={itemVariants}>
                           <Link
-                            href="/project"
+                            href="/projects"
                             onClick={() => setMobileMenuOpen(false)}
                             className="flex items-center gap-4 p-3 rounded-lg text-lg font-medium text-gray-700 hover:bg-gray-100 transition-colors"
-                            legacyBehavior>
+                            >
                               <FiHelpCircle /> Project
                           </Link>
                       </motion.div>
@@ -148,9 +137,6 @@ export default function Navbar() {
                       <motion.a variants={itemVariants} href="https://github.com/hanmeini" target="_blank" className="flex items-center gap-4 p-3 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors">
                           GitHub
                       </motion.a>
-                      <motion.a variants={itemVariants} href="https://linkedin.com/in/username" target="_blank" className="flex items-center gap-4 p-3 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors">
-                          LinkedIn
-                      </motion.a>
                   </div>
               </motion.div>
               <motion.div 
@@ -159,10 +145,10 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0, transition: { delay: 0.4 } }}
               >
                   <Link
-                    href="/kontak"
+                    href="/#contact"
                     onClick={() => setMobileMenuOpen(false)}
                     className="w-full flex items-center justify-center gap-2 bg-blue-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-600 transition-colors"
-                    legacyBehavior>
+                    >
                       <FiSend />
                       Let's Talk
                   </Link>

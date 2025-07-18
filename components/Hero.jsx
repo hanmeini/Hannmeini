@@ -2,37 +2,6 @@
 import { motion } from 'framer-motion';
 import {FiArrowRight, FiDownloadCloud} from 'react-icons/fi'
 
-const LiquidFillButton = ({ text, primary = true }) => {
-  const primaryClasses = "bg-gray-900 text-white";
-  const secondaryClasses = "bg-gray-200 text-gray-800";
-  
-  const primaryHoverClasses = "hover:text-gray-900 before:bg-white";
-  const secondaryHoverClasses = "hover:text-white before:bg-gray-900";
-
-  return (
-    <button className={`
-      relative 
-      text-sm md:text-md font-semibold py-3 px-8 rounded-lg 
-      w-full sm:w-auto
-      overflow-hidden 
-      transition-colors duration-300 ease-in-out
-      ${primary ? primaryClasses : secondaryClasses}
-      ${primary ? primaryHoverClasses : secondaryHoverClasses}
-      
-      before:absolute 
-      before:bottom-0 
-      before:left-0 
-      before:w-full 
-      before:h-full 
-      before:translate-y-full 
-      before:transition-transform 
-      before:duration-300 
-      before:ease-in-out
-    `}>
-      <span className="relative z-10">{text}</span>
-    </button>
-  );
-};
 
 const ShimmerBorderButton = ({ text, primary = true }) => {
   const primaryClasses = "bg-gray-900 text-white";
@@ -42,7 +11,7 @@ const ShimmerBorderButton = ({ text, primary = true }) => {
     <button className={`
       relative 
       text-sm md:text-md font-semibold py-3 px-8 rounded-lg 
-      w-full sm:w-auto
+      w-max sm:w-auto
       overflow-hidden
       group
       ${primary ? primaryClasses : secondaryClasses}
@@ -61,53 +30,6 @@ const ShimmerBorderButton = ({ text, primary = true }) => {
   );
 };
 
-const Flip3DButton = ({ text, icon, primary = true }) => {
-  const Icon = icon;
-  const primaryClasses = "bg-gray-900 text-white";
-  const secondaryClasses = "bg-gray-200 text-gray-800";
-
-  return (
-    // Container untuk perspektif 3D
-    <div className="group w-full sm:w-auto" style={{ perspective: '1000px' }}>
-      <button 
-        className={`
-          relative 
-          text-sm md:text-md font-semibold 
-          w-full 
-          transition-transform duration-500 ease-in-out
-        `}
-        style={{ transformStyle: 'preserve-3d' }}
-      >
-        {/* Sisi Depan */}
-        <div className={`
-          flex items-center justify-center gap-2
-          py-3 px-8 rounded-lg 
-          w-full
-          transition-colors duration-300
-          ${primary ? primaryClasses : secondaryClasses}
-        `}>
-          {text}
-        </div>
-        
-        {/* Sisi Belakang (Awalnya terbalik) */}
-        <div 
-          className={`
-            absolute inset-0 
-            flex items-center justify-center 
-            py-3 px-8 rounded-lg 
-            ${primary ? 'bg-white text-gray-900' : 'bg-gray-900 text-white'}
-          `}
-          style={{ 
-            transform: 'rotateX(180deg)',
-            backfaceVisibility: 'hidden',
-          }}
-        >
-          <Icon size={20} />
-        </div>
-      </button>
-    </div>
-  );
-};
 
 
 export default function Hero() {
@@ -150,7 +72,7 @@ export default function Hero() {
         transition={{ duration: 0.7, delay: 0.6 }}
         className="flex flex-col sm:flex-row items-center gap-4 mt-10"
       >
-      <div className="flex flex-col sm:flex-row items-center gap-4">
+      <div className="flex flex-row items-center gap-4">
         <ShimmerBorderButton text="Let's Work Together" primary={true} />
         <ShimmerBorderButton text="My CV" primary={false} />
       </div>

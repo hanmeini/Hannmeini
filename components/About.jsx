@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { FiLinkedin, FiGithub, FiTwitter, FiInstagram } from 'react-icons/fi';
+import { FaWhatsapp } from "react-icons/fa";
 import Link from 'next/link';
 
 export default function About() {
@@ -38,10 +39,17 @@ export default function About() {
                 About Me
               </Link>
               <div className="flex items-center gap-10 text-gray-500">
-                {/* <Link href="" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-black"><FiTwitter size={30} /></Link> */}
-                {/* <Link href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-black"><FiLinkedin size={30} /></Link> */}
                 <Link href="https://github.com/hanmeini" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-black"><FiGithub size={30} /></Link>
                 <Link href="https://www.instagram.com/hanmeini_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-black"><FiInstagram size={30} /></Link>
+                <a 
+                  href="https://wa.me/6288216418544?text=Halo%20Raihan,%20saya%20melihat%20portofolio%20Anda%20dan%20tertarik%20untuk%20berdiskusi%20lebih%20lanjut." 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  aria-label="WhatsApp" 
+                  className="text-black"
+                >
+                  <FaWhatsapp size={30} />
+                </a>
               </div>
             </div>
           </motion.div>
