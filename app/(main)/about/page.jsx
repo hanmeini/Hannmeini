@@ -7,6 +7,8 @@ import { FiCode, FiCoffee, FiAward, FiBookOpen } from 'react-icons/fi';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabaseClient'; 
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import CertificateSkeleton from '@/components/CertificateSkeleton'; 
+import ExperienceSkeleton from '@/components/ExperiencesSkeleton';
 
 const galleryPhotos = [
   { src: '/logos/poto1.jpg', alt: 'Foto profil', className: 'col-span-2 row-span-2' },
@@ -18,87 +20,22 @@ const galleryPhotos = [
   { src: '/logos/poto2.jpg', alt: 'Foto lainnya 2', className: 'col-span-2 row-span-1' },
 ];
 
-const certificates = [
-  { 
-    id: 1,
-    src: '/logos/sertif1.png', 
-    alt: 'Sertifikat Juara 1 Lomba Web Desain',
-    title: '1st Place - National Web Design Competition',
-    description: 'Achieved first place by developing "Selaras", a web platform focused on solving food waste. This project demonstrated proficiency in front-end development, UI/UX implementation, and problem-solving.',
-  },
-  { 
-    id: 2,
-    src: '/logos/sertif2.png', 
-    alt: 'Sertifikat JavaScript Fundamental',
-    title: 'JavaScript Fundamentals Certification',
-    description: 'Completed a comprehensive course covering core JavaScript concepts, including ES6+, DOM manipulation, and asynchronous programming, laying a strong foundation for web development.',
-  },
-  { 
-    id: 3,
-    src: '/logos/sertif3.png', 
-    alt: 'Sertifikat React Basics',
-    title: 'React Basics Workshop',
-    description: 'Participated in an intensive workshop on React, learning about component-based architecture, state management, and hooks to build modern, interactive user interfaces.',
-  },
-  { 
-    id: 4,
-    src: '/logos/sertif4.png', 
-    alt: 'Sertifikat React Basics',
-    title: 'React Basics Workshop',
-    description: 'Participated in an intensive workshop on React, learning about component-based architecture, state management, and hooks to build modern, interactive user interfaces.',
-  },
-  { 
-    id: 5,
-    src: '/logos/sertif5.png', 
-    alt: 'Sertifikat React Basics',
-    title: 'React Basics Workshop',
-    description: 'Participated in an intensive workshop on React, learning about component-based architecture, state management, and hooks to build modern, interactive user interfaces.',
-  },
-];
 
-const experiences = [
-    {
-    company: 'GoPay',
-    role: 'UI/UX Design Intern',
-    description: [
-      'As a UI/UX Designer Intern at GoPay, I had the privilege of contributing to the dynamic and innovative world of digital payments. During my internship, I immersed myself in the intricacies of creating seamless and user-friendly interfaces that align with GoPay commitment to providing an exceptional financial experience.',
-      'I Collaborated with the design team to create visually appealing and intuitive user interfaces for GoPay mobile and web applications. Assisted in designing clean, modern layouts that enhanced the overall user experienced.',
-      'I Engaged in cross-functional collaboration with developers, product managers, and fellow designers. Participated in design sprints and brainstorming sessions to ideate and solve complex design challenges.'
-    ]
-  },
-  {
-    company: 'National Web Design Competition',
-    role: '1st Place Winner & Frontend Developer',
-    description: [
-      'Developed "Saresa", a web platform focused on solving food waste, which won first place in a national competition. My role involved translating a complex UI/UX design into a pixel-perfect, responsive, using vanilla HTML, CSS, and JavaScript.',
-      'This experience honed my skills in front-end architecture, DOM manipulation, and creating fluid animations with pure CSS, proving my ability to deliver a high-quality product under competitive pressure.'
-    ]
-  },
-    {
-    company: 'National Web Design Competition',
-    role: '3rd Place Winner & Frontend Developer',
-    description: [
-      'Developed "Swara", a web platform focused on solving food waste, which won first place in a national competition. My role involved translating a complex UI/UX design into a pixel-perfect, responsive, using vanilla HTML, CSS, and JavaScript.',
-      'This experience honed my skills in front-end architecture, DOM manipulation, and creating fluid animations with pure CSS, proving my ability to deliver a high-quality product under competitive pressure.'
-    ]
-  },
-];
 
 export default function AboutPage() {
   const [selectedCert, setSelectedCert] = useState(0);
   const [certificates, setCertificates] = useState([]);
+  const [experiences, setExperiences] = useState([]);
   const [loadingCerts, setLoadingCerts] = useState(true);
+  const [loadingExp, setLoadingExp] = useState(true)
 
   useEffect(() => {
     const fetchCertificates = async () => {
       setLoadingCerts(true);
-      // 'data' dan 'error' dideklarasikan di dalam scope ini
       const { data, error } = await supabase
         .from('certificates')
         .select('*')
         .order('issue_date', { ascending: false });
-
-      // 'error' hanya digunakan di dalam scope ini, yang mana sudah benar
       if (error) {
         console.error("Could not fetch certificates:", error);
         setCertificates([]);
@@ -109,7 +46,26 @@ export default function AboutPage() {
     };
 
     fetchCertificates();
-  }, []); // Dependency array kosong agar hanya berjalan sekali saat komponen dimuat
+  }, []); 
+
+  useEffect(() => {
+    const fetchExperiences = async () => {
+      setLoadingExp(true);
+      const { data, error } = await supabase
+        .from('experiences')
+        .select('*')
+        .order('created_at', { ascending: false });
+      if (error) {
+        console.error("Could not fetch experiences:", error);
+        setExperiences([]);
+      } else {
+        setExperiences(data || []);
+      }
+      setLoadingExp(false);
+    };
+
+    fetchExperiences();
+  }, []); 
 
   const handleNext = () => {
     if (certificates.length === 0) return;
@@ -206,7 +162,7 @@ export default function AboutPage() {
           <hr className="mt-4 mb-20 md:mb-auto text-gray-300 w-full" />
           
           {loadingCerts ? (
-            <div className="text-center min-h-[500px] flex items-center justify-center">Loading certificates...</div>
+            <CertificateSkeleton />
           ) : certificates.length > 0 ? (
             <>
               {/* DESKTOP VIEW */}
@@ -292,26 +248,34 @@ export default function AboutPage() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800" style={{ fontFamily:'asgard' }}>My Experience</h2>
           <hr className="mt-4 text-gray-300 w-full mb-20" />
           <div className="space-y-20">
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6 }}
-                className='border-b border-gray-200 pb-5'
-              >
-                <div className=" pb-8">
-                  <h3 className="text-xl md:text-4xl font-bold text-gray-900">{exp.company}</h3>
-                  <p className="text-lg text-gray-500 mt-1">{exp.role}</p>
-                </div>
-                <div className="mt-8 text-gray-700 text-lg leading-relaxed space-y-5">
-                  {exp.description.map((paragraph, pIndex) => (
-                    <p key={pIndex}>{paragraph}</p>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+            {/* 1. Bungkus semua logika dengan {} */}
+            {loadingExp ? (
+              <ExperienceSkeleton />
+            ) : experiences.length > 0 ? (
+              // Jika tidak loading DAN ada data, render daftar pengalaman
+              experiences.map((exp, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.6 }}
+                  className='border-b border-gray-200 pb-5'
+                >
+                  <div className="pb-8">
+                    <h3 className="text-xl md:text-4xl font-bold text-gray-900">{exp.title}</h3>
+                    <p className="text-lg text-gray-500 mt-1">{exp.categories}</p>
+                  </div>
+                  <div className="mt-8 text-gray-700 text-lg leading-relaxed space-y-5">
+                    <p>{exp.description}</p>
+                  </div>
+                </motion.div>
+              ))
+            ) : (
+              <div className="text-center text-gray-500">
+                No experiences found.
+              </div>
+            )}
           </div>
         </section>
       </div>
