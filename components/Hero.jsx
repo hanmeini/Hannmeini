@@ -1,11 +1,15 @@
 "use client";
 import { motion } from 'framer-motion';
-import {FiArrowRight, FiDownloadCloud} from 'react-icons/fi'
+import { FiArrowRight, FiDownloadCloud } from 'react-icons/fi';
+import Link from 'next/link'; // 1. Impor komponen Link
 
-
-const ShimmerBorderButton = ({ text, primary = true }) => {
+/**
+ * MODIFIED SHIMMER BORDER BUTTON
+ * Menerima `children` untuk fleksibilitas (teks + ikon).
+ */
+const ShimmerBorderButton = ({ children, primary = true }) => {
   const primaryClasses = "bg-gray-900 text-white";
-  const secondaryClasses = "bg-gray-200 text-gray-800";
+  const secondaryClasses = "bg-white text-gray-800 border border-gray-300";
 
   return (
     <button className={`
@@ -14,22 +18,24 @@ const ShimmerBorderButton = ({ text, primary = true }) => {
       w-max sm:w-auto
       overflow-hidden
       group
+      transition-transform duration-200 ease-in-out active:scale-95
       ${primary ? primaryClasses : secondaryClasses}
     `}>
-      {/* Lapisan Latar Belakang */}
-      <span className="absolute inset-0 z-0 transition-colors duration-300 group-hover:bg-gray-800"></span>
-      
-      {/* Lapisan Gradasi Berputar (Awalnya tidak terlihat) */}
+      {/* Lapisan Gradasi Berputar */}
       <span className="absolute -inset-1 z-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
         <span className="absolute inset-0 animate-border-spin rounded-xl bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
       </span>
+      
+      {/* Lapisan Latar Belakang Solid untuk menutupi gradasi */}
+      <span className={`absolute inset-[1.5px] z-10 rounded-[7px] ${primary ? 'bg-gray-900' : 'bg-white'} transition-colors duration-300 ${primary ? 'group-hover:bg-gray-800' : 'group-hover:bg-gray-50'}`}></span>
 
-      {/* Konten Tombol */}
-      <span className="relative z-10">{text}</span>
+      {/* Konten Tombol (sekarang menggunakan children) */}
+      <span className="relative z-20 flex items-center justify-center gap-2">
+        {children}
+      </span>
     </button>
   );
 };
-
 
 
 export default function Hero() {
@@ -72,35 +78,20 @@ export default function Hero() {
         transition={{ duration: 0.7, delay: 0.6 }}
         className="flex flex-col sm:flex-row items-center gap-4 mt-10"
       >
-      <div className="flex flex-row items-center gap-4">
-        <ShimmerBorderButton text="Let's Work Together" primary={true} />
-        <ShimmerBorderButton text="My CV" primary={false} />
-      </div>
+        <Link href="#contact">
+            <ShimmerBorderButton primary={true}>
+              <span>Let's Work Together</span>
+              <FiArrowRight />
+            </ShimmerBorderButton>
+        </Link>
+        
+        <a href="public/Resume-Raihan.pdf" download>
+            <ShimmerBorderButton primary={false}>
+              <span>My CV</span>
+              <FiDownloadCloud />
+            </ShimmerBorderButton>
+        </a>
       </motion.div>
-
-      {/* <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.8 }}
-        className="mt-16 w-full max-w-2xl flex flex-row "
-      >
-        <div className="flex-1 p-5 text-center">
-          <p className="text-2xl md:text-3xl font-bold text-purple-800">2+</p>
-          <p className="text-sm text-gray-500 mt-1">Years of Learning</p>
-        </div>
-        <div className="flex-1 p-5 text-center">
-          <p className="text-2xl md:text-3xl font-bold text-purple-800">10+</p>
-          <p className="text-sm text-gray-500 mt-1">Projects Completed</p>
-        </div>
-        <div className="flex-1 p-5 text-center">
-          <p className="text-2xl md:text-3xl font-bold text-purple-800">5+</p>
-          <p className="text-sm text-gray-500 mt-1">Core Technologies</p>
-        </div>
-        <div className="flex-1 p-5 text-center">
-          <p className="text-2xl md:text-3xl font-bold text-purple-800">2</p>
-          <p className="text-sm text-gray-500 mt-1">Championship</p>
-        </div>
-      </motion.div> */}
     </section>
   );
 }
