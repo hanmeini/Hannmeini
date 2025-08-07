@@ -1,3 +1,5 @@
+// In app/projects/[id]/page.js
+
 import { supabase } from '@/lib/supabaseClient';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -15,7 +17,7 @@ async function getProject(id) {
   return data;
 }
 
-// Komponen Info Box untuk Grid di bawah
+// Komponen Info Box (tetap sama)
 function InfoBox({ icon, title, value, isLink = false }) {
   const Icon = icon;
   return (
@@ -37,9 +39,11 @@ function InfoBox({ icon, title, value, isLink = false }) {
   );
 }
 
-// Komponen utama halaman detail
+// Komponen utama halaman detail (sudah diperbaiki)
 export default async function ProjectDetailPage({ params }) {
   const project = await getProject(params.id);
+
+  // The useState hook has been removed. That's the only change needed.
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-24 sm:py-32">
@@ -48,7 +52,6 @@ export default async function ProjectDetailPage({ params }) {
         <div className="group grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           {/* Kolom Kiri: Gambar */}
-          {/* 2. Tambahkan transisi dan efek group-hover */}
           <div className="w-full h-80 lg:h-[450px] relative rounded-lg overflow-hidden transition-all duration-500 ease-in-out group-hover:shadow-xl group-hover:-translate-y-2">
             <Image
               src={project.image_url}
@@ -61,7 +64,6 @@ export default async function ProjectDetailPage({ params }) {
 
           {/* Kolom Kanan: Deskripsi */}
           <div className="flex flex-col justify-center">
-            {/* 3. Tambahkan efek underline pada judul */}
             <h1 className="text-4xl md:text-5xl font-medium text-gray-900 inline-block">
               <span className="pb-2 bg-gradient-to-r from-black to-black bg-no-repeat bg-bottom bg-[length:0%_3px] group-hover:bg-[length:100%_3px] transition-all duration-500" style={{ fontFamily:'asgard' }}>
                 {project.title}
@@ -71,7 +73,6 @@ export default async function ProjectDetailPage({ params }) {
               {project.description}
             </p>
             
-            {/* 4. Tambahkan efek underline dan translate pada link */}
             {project.live_url && (
               <a 
                 href={project.live_url} 
@@ -89,7 +90,7 @@ export default async function ProjectDetailPage({ params }) {
         </div>
 
         {/* Bagian Bawah: Grid Info */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 mt-16 lg:mt-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-16 lg:mt-24">
           <InfoBox 
             icon={FiClipboard} 
             title="Type Project" 

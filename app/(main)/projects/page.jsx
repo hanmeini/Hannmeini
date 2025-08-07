@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import SingleProject from '@/components/AllSingleProject';
+import ProjectListSkeleton from '@/components/SkeletonProjects'
 
 export default function AllProjectsPage() {
   const [projects, setProjects] = useState([]);
@@ -41,7 +42,7 @@ export default function AllProjectsPage() {
 
         {/* Daftar Proyek */}
         {loading ? (
-          <div className="text-center text-gray-500 text-lg">Loading...</div>
+          <ProjectListSkeleton count={3} />
         ) : (
           <div className="space-y-24">
             {projects.length === 0 ? (
