@@ -85,7 +85,7 @@ export default function Hero() {
             </ShimmerBorderButton>
         </Link>
         
-        <a href="public/Resume-Raihan.pdf" download>
+        <a href="/Resume Raihan.pdf" download>
             <ShimmerBorderButton primary={false}>
               <span>My CV</span>
               <FiDownloadCloud />
