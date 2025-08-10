@@ -59,7 +59,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="fixed top-0 w-full z-40 bg-white backdrop-blur-lg p-4">
-        <div className="flex items-center justify-between mx-auto md:mx-10 lg:mx-24 h-10 ">          
+        <div className="flex items-center justify-end mx-auto md:mx-10 lg:mx-24 h-10 ">          
           {/*  Navigasi Desktop */}
           <div className="hidden md:flex flex-auto justify-end items-center gap-14 text-sm font-medium text-[#2E2E2E]">
             <Link href="/" className="hover:text-blue-600 hover:-translate-y-1 transition-all duration-300 ease-in-out">Home</Link>
