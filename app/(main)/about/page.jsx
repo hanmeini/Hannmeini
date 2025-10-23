@@ -15,7 +15,7 @@ const galleryPhotos = [
   { src: '/logos/poto7.jpg', alt: 'Foto proyek Selaras', className: 'col-span-2 row-span-1' },
   { src: '/logos/poto3.jpg', alt: 'Foto setup kerja', className: 'col-span-1 row-span-1' },
   { src: '/logos/poto4.jpg', alt: 'Foto saat lomba', className: 'col-span-1 row-span-1' },
-  { src: '/logos/poto5.jpg', alt: 'Foto lainnya 1', className: 'col-span-1 row-span-1' },
+  { src: '/logos/han1st-place.jpg', alt: 'Binus 1st place', className: 'col-span-1 row-span-1' },
   { src: '/logos/poto6.jpg', alt: 'Foto lainnya 2', className: 'col-span-1 row-span-1' },
   { src: '/logos/poto2.jpg', alt: 'Foto lainnya 2', className: 'col-span-2 row-span-1' },
 ];
@@ -139,7 +139,7 @@ export default function AboutPage() {
           </div>
           <div className="flex-1 p-2 md:p-6 text-center">
             <FiCoffee className="mx-auto w-8 h-8  mb-2" />
-            <p className="text-md md:text-2xl font-bold">2</p>
+            <p className="text-md md:text-2xl font-bold">3+</p>
             <p className="text-sm text-gray-500">Awards</p>
           </div>
           <div className="flex-1 p-2 md:p-6 text-center">

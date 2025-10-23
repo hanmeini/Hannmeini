@@ -33,6 +33,9 @@ const playfair = Playfair_Display({
 export const metadata = {
   title: "Hanmeini",
   description: "Portfolio",
+  icons: {
+    "icon": "/logos/image.png"
+  }
 };
 
 export default function RootLayout({ children }) {
