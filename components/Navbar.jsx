@@ -3,10 +3,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import React, { useState, useRef, useEffect } from "react";
+import { FaMenuAltRight } from 'react-icons/fa';
 import { motion, AnimatePresence } from "framer-motion";
-
-
-// Logo component now uses Image from next/image
+import { CiMenuFries } from "react-icons/ci";
+import { RiErrorWarningLine } from "react-icons/ri";
+import { GoHome } from "react-icons/go";
+import { IoGitNetworkOutline } from "react-icons/io5";
+import { FaPaperPlane } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 
 
 export default function Navbar() {
@@ -53,7 +57,9 @@ export default function Navbar() {
   return (
     <>
       <nav className="fixed top-0 w-full z-40 bg-white backdrop-blur-lg p-4">
-        <div className="flex items-center justify-end mx-auto md:mx-10 lg:mx-24 h-10 ">          
+        <div className="flex items-center justify-end md:justify-between mx-auto md:mx-10 lg:mx-24 h-10 ">  
+          <Image
+          src='/logos/image.png' width={40} height={40} alt='Logo' className='md:flex hidden'/>        
           {/*  Navigasi Desktop */}
           <div className="hidden md:flex flex-auto justify-end items-center gap-14 text-sm font-medium text-[#2E2E2E]">
             <Link href="/" className="hover:text-blue-600 hover:-translate-y-1 transition-all duration-300 ease-in-out">Home</Link>
@@ -62,13 +68,7 @@ export default function Navbar() {
             <Link href="/#contact" className="hover:text-blue-600 hover:-translate-y-1 transition-all duration-300 ease-in-out">Contact</Link>
           </div>
           <button onClick={() => setMobileMenuOpen(true)} className="md:hidden p-2 -ml-2">
-            <Image
-              src="/logos/image.png"
-              alt="Menu"
-              width={32}
-              height={32}
-              className="object-contain"
-            />
+            <CiMenuFries size={24} />
           </button>
         </div>
       </nav>
@@ -92,13 +92,7 @@ export default function Navbar() {
             >
               <div className="flex justify-between items-center p-4 border-b">
                   <button onClick={() => setMobileMenuOpen(false)} className="p-2">
-                    <Image
-                      src="/logos/image.png"
-                      alt="Close"
-                      width={24}
-                      height={24}
-                      className="object-contain hover:rotate-90 transition-transform duration-300"
-                    />
+                    <CiMenuFries size={24} />
                   </button>
               </div>
               <motion.div 
@@ -114,13 +108,8 @@ export default function Navbar() {
                             onClick={() => setMobileMenuOpen(false)}
                             className="flex items-center gap-4 p-3 rounded-lg text-lg font-medium text-gray-700 hover:bg-gray-100 transition-colors"
                             >
-                              <Image
-                                src="/logos/image.png"
-                                alt="Home"
-                                width={24}
-                                height={24}
-                                className="object-contain"
-                              /> Home
+                              <GoHome />
+                               Home
                           </Link>
                       </motion.div>
                       <motion.div variants={itemVariants}>
@@ -129,13 +118,8 @@ export default function Navbar() {
                             onClick={() => setMobileMenuOpen(false)}
                             className="flex items-center gap-4 p-3 rounded-lg text-lg font-medium text-gray-700 hover:bg-gray-100 transition-colors"
                             >
-                              <Image
-                                src="/logos/image.png"
-                                alt="About"
-                                width={24}
-                                height={24}
-                                className="object-contain"
-                              /> About Me
+                              <RiErrorWarningLine />
+                               About Me
                           </Link>
                       </motion.div>
                       <motion.div variants={itemVariants}>
@@ -144,13 +128,8 @@ export default function Navbar() {
                             onClick={() => setMobileMenuOpen(false)}
                             className="flex items-center gap-4 p-3 rounded-lg text-lg font-medium text-gray-700 hover:bg-gray-100 transition-colors"
                             >
-                              <Image
-                                src="/logos/image.png"
-                                alt="Projects"
-                                width={24}
-                                height={24}
-                                className="object-contain"
-                              /> Project
+                              <IoGitNetworkOutline />
+                               Project
                           </Link>
                       </motion.div>
                   </nav>
@@ -158,7 +137,8 @@ export default function Navbar() {
                   <hr className="my-6" />
                   <div className="space-y-2">
                       <motion.p variants={itemVariants} className="px-3 text-sm font-semibold text-gray-400">FIND ME ON</motion.p>
-                      <motion.a variants={itemVariants} href="https://github.com/hanmeini" target="_blank" className="flex items-center gap-4 p-3 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors">
+                      <motion.a variants={itemVariants} href="https://github.com/hanmeini" target="_blank" className="flex row items-center gap-4 p-3 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors">
+                      <FaGithub />
                           GitHub
                       </motion.a>
                   </div>
@@ -173,13 +153,7 @@ export default function Navbar() {
                     onClick={() => setMobileMenuOpen(false)}
                     className="w-full flex items-center justify-center gap-2 bg-blue-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-600 transition-colors"
                     >
-                      <Image
-                        src="/logos/image.png"
-                        alt="Contact"
-                        width={24}
-                        height={24}
-                        className="object-contain"
-                      />
+                      <FaPaperPlane />
                       Let's Talk
                   </Link>
               </motion.div>

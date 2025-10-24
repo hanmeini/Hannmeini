@@ -1,7 +1,8 @@
 "use client";
 import { motion } from 'framer-motion';
 import { FiArrowRight, FiDownloadCloud } from 'react-icons/fi';
-import Link from 'next/link'; // 1. Impor komponen Link
+import Link from 'next/link';
+import Image from 'next/image';
 
 /**
  * MODIFIED SHIMMER BORDER BUTTON
@@ -41,6 +42,7 @@ const ShimmerBorderButton = ({ children, primary = true }) => {
 export default function Hero() {
   return (
     <section id="home" className="min-h-screen w-full flex flex-col justify-center items-center text-center px-4 pt-24 pb-12">
+      <Image src='/logos/image.png' width={40} height={40} alt='logo' className='my-4'/>
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -85,7 +87,7 @@ export default function Hero() {
             </ShimmerBorderButton>
         </Link>
         
-        <a href="/Resume Raihan.pdf" download>
+        <a href="/Resume Raihan-EN.pdf" download>
             <ShimmerBorderButton primary={false}>
               <span>My CV</span>
               <FiDownloadCloud />
