@@ -5,13 +5,14 @@ import Shots from '@/components/Shots';
 import Tools from '@/components/Tools';
 import Services from '@/components/Services';
 import Contact from '@/components/Contact';
+import Achievments from '@/components/Achievments';
 
 export default function Home() {
   return (
     <>
       <Hero />
       <Projects />
-      {/* <Shots /> */}
+      <Achievments/>
       <About />
       <Services/>
       <Tools />
