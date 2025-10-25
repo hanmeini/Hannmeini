@@ -2,8 +2,41 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { FiLinkedin, FiGithub, FiTwitter, FiInstagram } from 'react-icons/fi';
-import { FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp, FaChevronRight } from "react-icons/fa";
 import Link from 'next/link';
+import { FaRightLong } from 'react-icons/fa6';
+import { FaArrowRight } from "react-icons/fa";
+import { FiArrowRight } from 'react-icons/fi';
+
+const ShimmerBorderButton = ({ children, primary = true }) => {
+  const primaryClasses = "bg-gray-900 text-white";
+  const secondaryClasses = "bg-white text-gray-800 border border-gray-300";
+
+  return (
+    <Link href='/about' className={`
+      relative 
+      text-sm md:text-md font-semibold py-3 px-8 rounded-lg 
+      w-max sm:w-auto
+      overflow-hidden
+      group
+      transition-transform duration-200 ease-in-out active:scale-95
+      ${primary ? primaryClasses : secondaryClasses}
+    `}>
+      {/* Lapisan Gradasi Berputar */}
+      <span className="absolute -inset-1 z-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+        <span className="absolute inset-0 animate-border-spin rounded-xl bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+      </span>
+      
+      {/* Lapisan Latar Belakang Solid untuk menutupi gradasi */}
+      <span className={`absolute inset-[1.5px] z-10 rounded-[7px] ${primary ? 'bg-gray-900' : 'bg-white'} transition-colors duration-300 ${primary ? 'group-hover:bg-gray-800' : 'group-hover:bg-gray-50'}`}></span>
+
+      {/* Konten Tombol (sekarang menggunakan children) */}
+      <span className="relative z-20 flex items-center justify-center gap-2">
+        {children}
+      </span>
+    </Link>
+  );
+};
 
 export default function About() {
   return (
@@ -33,11 +66,10 @@ export default function About() {
               My journey in the tech field has equipped me with a diverse skill set that combines problem-solving, clean code principles, and a strong understanding of modern web technologies.
             </p>
             <div className="mt-8 flex items-center gap-4 flex-wrap">
-              <Link
-              href='/about'
-               className="bg-gray-200 text-gray-800 font-semibold py-3 px-10 md:py-5 md:px-14 rounded-lg md:rounded-2xl hover:bg-gray-300 text-xl transition-colors">
-                About Me
-              </Link>
+            <ShimmerBorderButton primary={true}>
+              <span>About Me</span>
+              <FiArrowRight />
+            </ShimmerBorderButton>
               <div className="flex items-center gap-10 text-gray-500">
                 <Link href="https://github.com/hanmeini" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-black"><FiGithub size={30} /></Link>
                 <Link href="https://www.instagram.com/hanmeini_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-black"><FiInstagram size={30} /></Link>
