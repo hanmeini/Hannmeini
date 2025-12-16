@@ -50,7 +50,7 @@ export const metadata = {
     "SMK N 8 Semarang",
     "Jasa Pembuatan Website",
     "Jasa Pembuatan Aplikasi",
-    "Jasa Pembuatan Desain"
+    "Jasa Pembuatan Desain",
   ],
   authors: [{ name: "Ahmad Raihan" }],
   creator: "Ahmad Raihan",
@@ -84,6 +84,9 @@ export const metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
+  },
+  verification: {
+    google: "EPU12ljIo0kjLeuaj5UW39PuP8RAo3RCaQVRNOX5uqs",
   },
 };
 
