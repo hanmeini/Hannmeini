@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabaseClient';
-import SingleProject from '@/components/AllSingleProject';
-import ProjectListSkeleton from '@/components/SkeletonProjects'
+import { useEffect, useState } from "react";
+// import { supabase } from '@/lib/supabaseClient';
+import SingleProject from "@/components/AllSingleProject";
+import ProjectListSkeleton from "@/components/SkeletonProjects";
 
 export default function AllProjectsPage() {
   const [projects, setProjects] = useState([]);
@@ -12,17 +12,29 @@ export default function AllProjectsPage() {
   useEffect(() => {
     const fetchProjects = async () => {
       setLoading(true);
-      const { data, error } = await supabase
-        .from('projects')
-        .select('*')
-        .order('project_date', { ascending: false });
+      try {
+        // Dynamic import to avoid SSR issues if any, though likely fine with standard import
+        // using the lib/firebase we created
+        const { db } = await import("@/lib/firebase");
+        const { collection, getDocs, query, orderBy } = await import(
+          "firebase/firestore"
+        );
 
-      if (error) {
-        console.error('Gagal memuat proyek:', error.message);
-      } else {
-        setProjects(data);
+        const q = query(
+          collection(db, "projects"),
+          orderBy("project_date", "desc")
+        );
+        const querySnapshot = await getDocs(q);
+
+        const projectsData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setProjects(projectsData);
+      } catch (error) {
+        console.error("Gagal memuat proyek:", error.message);
       }
-
       setLoading(false);
     };
 
@@ -34,10 +46,15 @@ export default function AllProjectsPage() {
       <main className="max-w-7xl mx-auto px-4 py-24 sm:py-32">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900" style={{ fontFamily: 'asgard' }}>
+          <h1
+            className="text-4xl md:text-5xl font-bold text-gray-900"
+            style={{ fontFamily: "asgard" }}
+          >
             Let's See My Project
           </h1>
-          <p className="mt-4 text-lg text-gray-600">These are some of the projects I've made</p>
+          <p className="mt-4 text-lg text-gray-600">
+            These are some of the projects I've made
+          </p>
         </div>
 
         {/* Daftar Proyek */}
@@ -46,10 +63,16 @@ export default function AllProjectsPage() {
         ) : (
           <div className="space-y-24">
             {projects.length === 0 ? (
-              <div className="text-center text-red-500">Belum ada proyek ditemukan.</div>
+              <div className="text-center text-red-500">
+                Belum ada proyek ditemukan.
+              </div>
             ) : (
               projects.map((project, index) => (
-                <SingleProject key={project.id} project={project} index={index} />
+                <SingleProject
+                  key={project.id}
+                  project={project}
+                  index={index}
+                />
               ))
             )}
           </div>

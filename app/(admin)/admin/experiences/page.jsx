@@ -1,27 +1,46 @@
-import { supabase } from '@/lib/supabaseClient';
-import Link from 'next/link';
-import Image from 'next/image';
-import DeleteExperienceButton from '@/components/admin/DeleteExperiencesButton'; // Komponen baru
+import { supabase } from "@/lib/supabaseClient";
+import Link from "next/link";
+import Image from "next/image";
+import DeleteExperienceButton from "@/components/admin/DeleteExperiencesButton"; // Komponen baru
 
 export default async function ListExperiencesPage() {
   // 1. Mengambil data dari tabel 'experiences'
   // 2. Mengurutkan berdasarkan 'start_date' yang ada di tabel ini
-  const { data: experiences, error } = await supabase
-    .from('experiences')
-    .select('*')
-    .order('created_at', { ascending: false });
+  const { db } = await import("@/lib/firebase");
+  const { collection, getDocs, query, orderBy } = await import(
+    "firebase/firestore"
+  );
 
-  if (error) {
-    console.error("Supabase error:", error.message);
-    return <p>Could not fetch experiences. Check the console for more details.</p>;
+  let experiences = [];
+  try {
+    const q = query(
+      collection(db, "experiences"),
+      orderBy("created_at", "desc")
+    );
+    const querySnapshot = await getDocs(q);
+    experiences = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+  } catch (error) {
+    console.error("Firebase error details:", error);
+    // Continue with empty array or handle error
   }
+
+  // const { data: experiences, error } = await supabase
+  //   .from('experiences')
+  //   .select('*')
+  //   .order('created_at', { ascending: false });
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Manage Experiences</h1>
         {/* 3. Link mengarah ke halaman tambah pengalaman yang benar */}
-        <Link href="/admin/experiences/new" className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
+        <Link
+          href="/admin/experiences/new"
+          className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
+        >
           + Add New Experience
         </Link>
       </div>
@@ -36,14 +55,21 @@ export default async function ListExperiencesPage() {
             </tr>
           </thead>
           <tbody>
-            {experiences.map(exp => (
+            {experiences.map((exp) => (
               <tr key={exp.id} className="border-b hover:bg-gray-50">
                 {/* 4. Menampilkan kolom yang benar: 'role' dan 'company' */}
                 <td className="p-4 font-medium text-gray-800">{exp.title}</td>
                 <td className="p-4 text-gray-600">{exp.description}</td>
-                <td className="p-4 text-gray-600">{new Date(exp.created_at).toLocaleDateString()}</td>
+                <td className="p-4 text-gray-600">
+                  {new Date(exp.created_at).toLocaleDateString()}
+                </td>
                 <td className="p-4 flex items-center gap-4">
-                  <Link href={`/admin/experiences/edit/${exp.id}`} className="text-blue-500 hover:underline">Edit</Link>
+                  <Link
+                    href={`/admin/experiences/edit/${exp.id}`}
+                    className="text-blue-500 hover:underline"
+                  >
+                    Edit
+                  </Link>
                   {/* 5. Menggunakan komponen DeleteExperienceButton */}
                   <DeleteExperienceButton experienceId={exp.id} />
                 </td>

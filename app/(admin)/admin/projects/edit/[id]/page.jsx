@@ -1,18 +1,24 @@
-import { supabase } from '@/lib/supabaseClient';
-import EditProjectForm from '@/components/admin/EditProjects'; 
-import { notFound } from 'next/navigation';
+import { db } from "@/lib/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import EditProjectForm from "@/components/admin/EditProjects";
+import { notFound } from "next/navigation";
 
 // Fungsi ini mengambil data awal untuk satu proyek
 async function getProjectData(id) {
-  const { data: project, error } = await supabase
-    .rpc('get_project_by_id', { p_id: id })
-    .single();
-  
-  if (error) {
-    console.error(error);
+  try {
+    const docRef = doc(db, "projects", id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return { id: docSnap.id, ...docSnap.data() };
+    } else {
+      console.log("No such document!");
+      notFound();
+    }
+  } catch (error) {
+    console.error("Error fetching project:", error);
     notFound();
   }
-  return project;
 }
 
 export default async function EditProjectPage({ params }) {

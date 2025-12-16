@@ -1,15 +1,24 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { FiGrid, FiFileText, FiAward, FiBriefcase, FiSettings, FiLogOut } from 'react-icons/fi';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  FiGrid,
+  FiFileText,
+  FiAward,
+  FiBriefcase,
+  FiSettings,
+  FiLogOut,
+  FiCpu,
+} from "react-icons/fi";
 
 const navLinks = [
-  { href: '/admin', label: 'Dashboard', icon: FiGrid },
-  { href: '/admin/projects', label: 'Projects', icon: FiFileText },
-  { href: '/admin/certificates', label: 'Certificates', icon: FiAward }, 
-  { href: '/admin/experiences', label: 'Experiences', icon: FiBriefcase },
-  { href: '/admin/settings', label: 'Settings', icon: FiSettings },
+  { href: "/admin", label: "Dashboard", icon: FiGrid },
+  { href: "/admin/projects", label: "Projects", icon: FiFileText },
+  { href: "/admin/certificates", label: "Certificates", icon: FiAward },
+  { href: "/admin/experiences", label: "Experiences", icon: FiBriefcase },
+  { href: "/admin/technologies", label: "Technologies", icon: FiCpu },
+  { href: "/admin/settings", label: "Settings", icon: FiSettings },
 ];
 
 // Sidebar sekarang menerima 'user' dan 'handleLogout' sebagai props
@@ -24,15 +33,17 @@ export default function Sidebar({ user, handleLogout }) {
       <nav className="flex-grow px-4 py-6">
         <ul>
           {navLinks.map((link) => {
-            const isActive = pathname.startsWith(link.href) && (link.href !== '/admin' || pathname === '/admin');
+            const isActive =
+              pathname.startsWith(link.href) &&
+              (link.href !== "/admin" || pathname === "/admin");
             return (
               <li key={link.label} className="mb-2">
                 <Link
                   href={link.href}
                   className={`flex items-center p-3 rounded-lg transition-colors ${
                     isActive
-                      ? 'bg-blue-500 text-white'
-                      : 'text-gray-400 hover:bg-gray-700 hover:text-white'
+                      ? "bg-blue-500 text-white"
+                      : "text-gray-400 hover:bg-gray-700 hover:text-white"
                   }`}
                 >
                   <link.icon className="w-5 h-5 mr-3" />
