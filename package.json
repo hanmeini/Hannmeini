@@ -14,7 +14,7 @@
     "autoprefixer": "^10.4.21",
     "firebase": "^12.6.0",
     "framer-motion": "^12.23.0",
-    "next": "15.3.4",
+    "next": "^16.0.10",
     "next-nprogress-bar": "^2.4.7",
     "nextjs-progressbar": "^0.0.16",
     "postcss": "^8.5.6",
